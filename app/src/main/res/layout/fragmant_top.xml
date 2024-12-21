@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="14dp">
+
+            <View
+                android:id="@+id/pointer_first"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:background="@drawable/cicle_off_shape"/>
+
+            <View
+                android:id="@+id/pointer_second"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/cicle_off_shape"/>
+
+            <View
+                android:id="@+id/pointer_third"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:background="@drawable/cicle_off_shape"/>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>
