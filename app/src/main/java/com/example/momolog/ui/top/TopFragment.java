@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.momolog.R;
@@ -31,6 +32,7 @@ public class TopFragment extends Fragment {
 
     private TopViewModel viewModel;
     private ViewPager2 viewPager;
+    private RecyclerView recyclerView;
     private CarouselAdapter carouselAdapter;
     private final List<View> pointerList = new ArrayList<>();
     private Runnable runnable;
@@ -59,6 +61,8 @@ public class TopFragment extends Fragment {
 
         //ViewPagerの取得
         viewPager = view.findViewById(R.id.view_pager);
+
+        recyclerView = view.findViewById(R.id.recycler_view);
 
         //カルーセルポイントView
         pointerList.add(view.findViewById(R.id.pointer_first));
