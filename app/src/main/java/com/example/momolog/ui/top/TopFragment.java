@@ -12,18 +12,40 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.momolog.R;
-import com.example.momolog.date.model.Recommendation;
+import com.example.momolog.data.model.Category;
+import com.example.momolog.data.model.StoreInfo;
+import com.example.momolog.ui.main.GridLayoutAdapter;
 import com.example.momolog.ui.top.adapter.CarouselAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class TopFragment extends Fragment {
+
+    // カードの横幅（dp）
+    private static final int CARD_WIDTH_DP = 140;
+    // カードの縦幅（dp）
+    private static final int CARD_HEIGHT_DP = 140;
+
+    private static final List<Category> INT_DATA_LIST = Arrays.asList(
+            new Category(1, "ber"),
+            new Category(2, "cheese"),
+            new Category(3, "french"),
+            new Category(4, "italian"),
+            new Category(5, "meat"),
+            new Category(6, "washoku"),
+            new Category(7, "tyu_ka"),
+            new Category(8, "sake"),
+            new Category(9, "sweets")
+    );
+    private GridLayoutAdapter adapter;
 
     //ログ表示用タグ名
     private static final String TAG = TopFragment.class.getSimpleName();
@@ -64,6 +86,21 @@ public class TopFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view);
 
+        // LayoutManagerを作成
+        GridLayoutManager layoutManager = new GridLayoutManager(
+                requireContext(),
+                3,
+                RecyclerView.VERTICAL,
+                false
+        );
+        float dp = getResources().getDisplayMetrics().density;
+        // Adapterの生成（インスタンス化）
+        adapter = new GridLayoutAdapter(INT_DATA_LIST, (int)(CARD_WIDTH_DP * dp), (int)(CARD_HEIGHT_DP * dp));
+        // RecyclerViewにAdapterを設定
+        recyclerView.setAdapter(adapter);
+        // RecyclerViewにLayoutManagerを設定
+        recyclerView.setLayoutManager(layoutManager);
+
         //カルーセルポイントView
         pointerList.add(view.findViewById(R.id.pointer_first));
         pointerList.add(view.findViewById(R.id.pointer_second));
@@ -80,14 +117,14 @@ public class TopFragment extends Fragment {
     private void settingViewModel(){
         viewModel = new ViewModelProvider(this).get(TopViewModel.class);
         // LiveDateの監視設定
-        viewModel.getRecommendationList().observe(requireActivity(), new Observer<List<Recommendation>>(){
+        viewModel.getStoreInfoList().observe(requireActivity(), new Observer<List<StoreInfo>>(){
             @Override
-            public void onChanged(List<Recommendation> recommendations){
+            public void onChanged(List<StoreInfo> storeInfoList){
                 //　おすすめ情報をUIに反映する処理
-                for (int i = 0; i < recommendations.size(); i++) {
-                    String imageUrl = carouselAdapter.getImageUrl(i);
-                    if (!imageUrl.equals(recommendations.get(i).getPath())) {
-                        carouselAdapter.setImageUrls(recommendations.get(i).getPath(), i);
+                for (int i = 0; i < storeInfoList.size(); i++) {
+                    StoreInfo storeInfo = carouselAdapter.getStoreInfo(i);
+                    if (storeInfo.getId() != storeInfoList.get(i).getId()) {
+                        carouselAdapter.setStoreInfo(storeInfoList.get(i), i);
                         carouselAdapter.notifyItemChanged(i);
                     }
                 }

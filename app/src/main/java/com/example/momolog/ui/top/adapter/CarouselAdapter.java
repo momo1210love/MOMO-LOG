@@ -11,20 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.momolog.R;
+import com.example.momolog.data.model.StoreInfo;
 
 import java.util.List;
 
 public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder> {
 
-    private List<String> imageUrls;
+    private List<StoreInfo> storeInfoList;
     private CarouselAdapterListener listener;
 
     public interface CarouselAdapterListener {
         void onClickCarouselItem();
     }
 
-    public CarouselAdapter(List<String> imageUrls){
-        this.imageUrls = imageUrls;
+    public CarouselAdapter(List<StoreInfo> storeInfoList){
+        this.storeInfoList = storeInfoList;
 
     }
 
@@ -37,9 +38,9 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Carous
 
     @Override
     public void onBindViewHolder(@NonNull CarouselAdapter.CarouselViewHolder holder, int position) {
-        String imageName = imageUrls.get(position);
+        StoreInfo storeInfo = storeInfoList.get(position);
         Context context = holder.itemView.getContext();
-        int resId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+        int resId = context.getResources().getIdentifier(storeInfo.getImageName(), "drawable", context.getPackageName());
         Glide.with(context)
                 .load(resId)
                 .into(holder.imageView);
@@ -53,22 +54,22 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Carous
 
     @Override
     public int getItemCount() {
-        return imageUrls.size();
+        return storeInfoList.size();
     }
 
-    public String getImageUrl(int position) {
-        if(imageUrls.size() > position) {
-            return imageUrls.get(position);
+    public StoreInfo getStoreInfo(int position) {
+        if(storeInfoList.size() > position) {
+            return storeInfoList.get(position);
         }
         //取得出来なかった場合は空文字を返す。
-        return "";
+        return null;
     }
 
-    public void setImageUrls(String imageUrl, int position) {
-        if(imageUrls.size() > position) {
-            imageUrls.set(position, imageUrl);
+    public void setStoreInfo(StoreInfo storeInfo, int position) {
+        if(storeInfoList.size() > position) {
+            storeInfoList.set(position, storeInfo);
         }else {
-            imageUrls.add(imageUrl);
+            storeInfoList.add(storeInfo);
         }
     }
 

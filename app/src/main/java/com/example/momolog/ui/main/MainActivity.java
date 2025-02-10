@@ -1,7 +1,6 @@
 package com.example.momolog.ui.main;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,16 +10,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.momolog.R;
-import com.example.momolog.date.api.ApiService;
-import com.example.momolog.date.api.RetrofitClient;
-import com.example.momolog.date.model.Greeting;
 import com.example.momolog.ui.top.TopFragment;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, fragment)
                 .commitNow();
-
-
 
 //        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 //        Call<Greeting> call = apiService.getGreeting();
