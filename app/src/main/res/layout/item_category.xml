@@ -18,6 +18,6 @@
             android:layout_height="match_parent"
             android:src="@drawable/uni"
             android:scaleType="centerCrop"/>
-    </FrameLayout>>
+    </FrameLayout>
 
 </androidx.cardview.widget.CardView>

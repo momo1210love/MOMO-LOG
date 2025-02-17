@@ -43,7 +43,10 @@ public class TopFragment extends Fragment {
             new Category(6, "washoku"),
             new Category(7, "tyu_ka"),
             new Category(8, "sake"),
-            new Category(9, "sweets")
+            new Category(9, "sweets"),
+            new Category(10, "uni"),
+            new Category(11, "ra_men"),
+            new Category(12, "osusi")
     );
     private GridLayoutAdapter adapter;
 
@@ -123,7 +126,7 @@ public class TopFragment extends Fragment {
                 //　おすすめ情報をUIに反映する処理
                 for (int i = 0; i < storeInfoList.size(); i++) {
                     StoreInfo storeInfo = carouselAdapter.getStoreInfo(i);
-                    if (storeInfo.getId() != storeInfoList.get(i).getId()) {
+                    if (storeInfo == null || storeInfo.getId() != storeInfoList.get(i).getId()) {
                         carouselAdapter.setStoreInfo(storeInfoList.get(i), i);
                         carouselAdapter.notifyItemChanged(i);
                     }
