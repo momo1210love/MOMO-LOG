@@ -35,18 +35,18 @@ public class TopFragment extends Fragment {
     private static final int CARD_HEIGHT_DP = 140;
 
     private static final List<Category> INT_DATA_LIST = Arrays.asList(
-            new Category(1, "ber"),
-            new Category(2, "cheese"),
-            new Category(3, "french"),
-            new Category(4, "italian"),
-            new Category(5, "meat"),
-            new Category(6, "washoku"),
-            new Category(7, "tyu_ka"),
-            new Category(8, "sake"),
-            new Category(9, "sweets"),
-            new Category(10, "uni"),
-            new Category(11, "ra_men"),
-            new Category(12, "osusi")
+            new Category(1, "washoku"),
+            new Category(2, "french"),
+            new Category(3, "italian"),
+            new Category(4, "tyu_ka"),
+            new Category(5, "osusi"),
+            new Category(6, "uni"),
+            new Category(7, "cheese"),
+            new Category(8, "meat"),
+            new Category(9, "ra_men"),
+            new Category(10, "sake"),
+            new Category(11, "ber"),
+            new Category(12, "sweets")
     );
     private GridLayoutAdapter adapter;
 
