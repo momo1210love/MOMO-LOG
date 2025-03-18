@@ -151,7 +151,6 @@ public class TopFragment extends Fragment {
             pointer.setBackgroundResource(R.drawable.cicle_off_shape);
         }
     }
-
     /**
      *
      * 自動スクロール処理
