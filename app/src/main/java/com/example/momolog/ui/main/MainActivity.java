@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -26,31 +27,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // ツールバーの設定
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("ももログ");
+
         Fragment fragment = TopFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, fragment)
                 .commitNow();
 
-//        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-//        Call<Greeting> call = apiService.getGreeting();
-//
-//        call.enqueue(new Callback<Greeting>() {
-//
-//
-//            @Override
-//            public void onResponse(Call<Greeting> call, Response<Greeting> response) {
-//                if (response.isSuccessful() && response.body() != null){
-//                    Greeting greeting = response.body();
-//                    Log.d("MainActivity", "Greeting: " + greeting.getContent());
-//                } else  {
-//                    Log.e("mainActivity", "Response error: " + response.code());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Greeting> call, Throwable t) {
-//                Log.e("MainActivity", "Network error: " + t.getMessage());
-//            }
-//        });
+
     }
 }

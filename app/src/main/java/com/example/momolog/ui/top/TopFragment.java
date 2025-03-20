@@ -35,21 +35,6 @@ public class TopFragment extends Fragment {
     // カードの縦幅（dp）
     private static final int CARD_HEIGHT_DP = 140;
 
-    private static final List<Category> INT_DATA_LIST = Arrays.asList(
-            new Category(1, "washoku"),
-            new Category(2, "french"),
-            new Category(3, "italian"),
-            new Category(4, "tyu_ka"),
-            new Category(5, "osusi"),
-            new Category(6, "uni"),
-            new Category(7, "cheese"),
-            new Category(8, "meat"),
-            new Category(9, "ra_men"),
-            new Category(10, "sake"),
-            new Category(11, "ber"),
-            new Category(12, "sweets")
-    );
-
     //ログ表示用タグ名
     private static final String TAG = TopFragment.class.getSimpleName();
     //カルーセル画面１ページあたりの表示時間
@@ -99,7 +84,7 @@ public class TopFragment extends Fragment {
         );
         float dp = getResources().getDisplayMetrics().density;
         // Adapterの生成（インスタンス化）
-        categoryAdapter = new CategoryAdapter(INT_DATA_LIST, (int)(CARD_WIDTH_DP * dp), (int)(CARD_HEIGHT_DP * dp));
+        categoryAdapter = new CategoryAdapter(new ArrayList<>(), (int)(CARD_WIDTH_DP * dp), (int)(CARD_HEIGHT_DP * dp));
         // RecyclerViewにAdapterを設定
         recyclerView.setAdapter(categoryAdapter);
         // RecyclerViewにLayoutManagerを設定
@@ -156,6 +141,8 @@ public class TopFragment extends Fragment {
 
         // おすすめ情報の取得
         viewModel.loadRecommendationList();
+        // カテゴリーの情報取得
+        viewModel.loadCategoryList();
 
         // 自動スクロール処理
         startAutoScroll();
