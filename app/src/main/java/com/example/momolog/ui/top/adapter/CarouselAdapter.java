@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.momolog.R;
+import com.example.momolog.data.Constants;
 import com.example.momolog.data.model.StoreInfo;
 
 import java.util.List;
@@ -40,16 +41,17 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Carous
     public void onBindViewHolder(@NonNull CarouselAdapter.CarouselViewHolder holder, int position) {
         StoreInfo storeInfo = storeInfoList.get(position);
         Context context = holder.itemView.getContext();
-        int resId = context.getResources().getIdentifier(storeInfo.getImageName(), "drawable", context.getPackageName());
+
+        // 画像のURLを作成する処理
+        String imageUrl = Constants.IMAGE_URL + storeInfo.getImageName();
         Glide.with(context)
-                .load(resId)
+                .load(imageUrl)
                 .into(holder.imageView);
         holder.itemView.setOnClickListener(v -> {
             if(listener != null) {
                 listener.onClickCarouselItem();
             }
         });
-
     }
 
     @Override

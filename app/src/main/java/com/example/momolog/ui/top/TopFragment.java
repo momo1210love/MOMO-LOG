@@ -21,6 +21,7 @@ import com.example.momolog.data.model.Category;
 import com.example.momolog.data.model.StoreInfo;
 import com.example.momolog.ui.main.GridLayoutAdapter;
 import com.example.momolog.ui.top.adapter.CarouselAdapter;
+import com.example.momolog.ui.top.adapter.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +49,6 @@ public class TopFragment extends Fragment {
             new Category(11, "ber"),
             new Category(12, "sweets")
     );
-    private GridLayoutAdapter adapter;
 
     //ログ表示用タグ名
     private static final String TAG = TopFragment.class.getSimpleName();
@@ -59,6 +59,7 @@ public class TopFragment extends Fragment {
     private ViewPager2 viewPager;
     private RecyclerView recyclerView;
     private CarouselAdapter carouselAdapter;
+    private CategoryAdapter categoryAdapter;
     private final List<View> pointerList = new ArrayList<>();
     private Runnable runnable;
     private int currentPage = 0;
@@ -98,9 +99,9 @@ public class TopFragment extends Fragment {
         );
         float dp = getResources().getDisplayMetrics().density;
         // Adapterの生成（インスタンス化）
-        adapter = new GridLayoutAdapter(INT_DATA_LIST, (int)(CARD_WIDTH_DP * dp), (int)(CARD_HEIGHT_DP * dp));
+        categoryAdapter = new CategoryAdapter(INT_DATA_LIST, (int)(CARD_WIDTH_DP * dp), (int)(CARD_HEIGHT_DP * dp));
         // RecyclerViewにAdapterを設定
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(categoryAdapter);
         // RecyclerViewにLayoutManagerを設定
         recyclerView.setLayoutManager(layoutManager);
 
@@ -119,6 +120,20 @@ public class TopFragment extends Fragment {
     //ViewModeの設定
     private void settingViewModel(){
         viewModel = new ViewModelProvider(this).get(TopViewModel.class);
+        viewModel.getCategoryList().observe(requireActivity(), new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categoryList) {
+                // カテゴリー情報をUIに反映する処理
+                for (int i =0; i < categoryList.size(); i++) {
+                    Category category = categoryAdapter.getCategory(i);
+                    if (category == null || category.getId() != categoryList.get(i).getId()) {
+                        categoryAdapter.setCategory(categoryList.get(i), i);
+                        categoryAdapter.notifyItemChanged(i);
+                    }
+                }
+            }
+        });
+
         // LiveDateの監視設定
         viewModel.getStoreInfoList().observe(requireActivity(), new Observer<List<StoreInfo>>(){
             @Override
