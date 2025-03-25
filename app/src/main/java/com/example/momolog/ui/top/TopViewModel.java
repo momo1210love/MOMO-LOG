@@ -74,7 +74,8 @@ public class TopViewModel extends ViewModel {
             public void onSuccess(List<StoreInfo> storeInfoList) {
                 // 成功した場合
                 Log.d(TAG, "onSuccess: ");
-                TopViewModel.this.storeInfoList.setValue(storeInfoList);
+                List<StoreInfo> carouselList = Arrays.asList(storeInfoList.get(0), storeInfoList.get(1), storeInfoList.get(2));
+                TopViewModel.this.storeInfoList.setValue(carouselList);
             }
 
             @Override
